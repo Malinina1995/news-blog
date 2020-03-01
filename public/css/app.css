@@ -1,0 +1,52 @@
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+h2 {
+  word-break: break-word;
+}
+
+.header {
+  flex: 0 0 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.imageFull {
+  width: 300px;
+  float: left;
+  margin-right: 30px;
+}
+
+.hContainer {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  word-wrap: break-spaces;
+}
+
+.fullInfo {
+  margin-bottom: 30px;
+}
+
+.aContainer {
+  margin-bottom: 10px;
+}
+
+.flex {
+  display: inline-block;
+}
+
