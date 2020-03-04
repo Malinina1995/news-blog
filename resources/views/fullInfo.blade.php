@@ -14,9 +14,11 @@
                 </div>
                 <img src="{{$news->image_path}}" class="card-img-top imageFull" alt="...">
                 <div class="fullInfo">{{$news->full}}</div>
-                @if(Auth::user())
-
+                @if(Auth::user() && Auth::user()->can('edit-news'))
                     <a href="{{ route('updateLink', $news->id) }}" class="mb-5 btn btn-primary">Редактировать</a>
+                @endif
+
+                @if(Auth::user()&& Auth::user()->can('delete-news'))
                     <a href="{{ route('deleteLink', $news->id) }}" class="mb-5 btn btn-danger">Удалить новость</a>
                 @endif
             </div>

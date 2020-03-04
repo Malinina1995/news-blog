@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand" href="/">BadlyNews</a>
         <div style="display: flex; flex-direction: row">
-            @if(Auth::user())
+            @if(Auth::user() && Auth::user()->can('add-news'))
                 <a class="btn btn-outline-primary" role="button" href="{{ route('add') }}">Добавить новость</a>
             @endif
 

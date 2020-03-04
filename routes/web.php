@@ -22,11 +22,9 @@
     Route::get('/home', 'HomeController@index');
 
 
-    Route::get('/text', function () {
-        $user = App\Models\User::find(3);
-//        dd($user->hasRole('web-developer')); // вернёт true
-//        dd($user->hasRole('project-manager'));// вернёт false
-//        dd($user->givePermissionsTo('manage-users'));
-        $perm = \App\Models\Permission::whereSlug('manage-users')->first();
-        dd($user->hasPermission($perm));// вернёт true;
+    Route::get('/test', function () {
+        $user = App\Models\User::find(1);
+        $perm = App\Models\Permission::whereSlug('delete-news')->first();
+        dd($user->hasPermissionTo($perm));
+        dd($user->can('delete-news'));
     });

@@ -4,11 +4,12 @@
 
     use App\Models\Permission;
     use App\Models\Role;
+    use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
     trait HasRolesAndPermissions
     {
         /**
-         * @return mixed
+         * @return BelongsToMany
          */
         public function roles()
         {
@@ -46,7 +47,7 @@
 
         public function hasPermission(Permission $permission)
         {
-            return (bool)$this->permissions->where('slug', $permission->slug)->count();
+            return (bool)$this->permissions()->where('slug', $permission->slug)->count();
         }
 
         public function deletePermissions(...$permissions)
@@ -62,7 +63,7 @@
         }
 
         /**
-         * @return mixed
+         * @return BelongsToMany
          */
         public function permissions()
         {

@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\User;
+use App\Models\User;
+use App\Models\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -59,22 +60,25 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param array $data
+     * @return App\Models\User
+     * @throws \Exception
      */
     protected function create(array $data)
     {
+        $role = Role::whereSlug( 'user')->first();
+
+        if (!$role) {
+            throw new \Exception("No user group found!");
+        }
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
-        $role = Role::where('slug', 'commentator');
-        UserRoler::create([
-            'user_id' => $user->id,
-            'role_id' => $role->id
-        ]);
+        $user->roles()->attach($role->id);
 
         return $user;
     }
